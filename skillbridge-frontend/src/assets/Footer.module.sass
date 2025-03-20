@@ -139,13 +139,28 @@ body
 .copyrightText
   margin: 0
 
-@media (max-width: 991px)
+@media (max-width: 990px)
   [class^="col"]
     margin-bottom: 30px
 
-@media (max-width: 767px)
+@media (max-width: 768px)
   .siteFooter
     padding-bottom: 0
+    display: flex
+    flex-direction: column
+    align-items: center
+    text-align: center
   .copyrightText,
   .socialIcons
     text-align: center
+  .row
+    flex-direction: column
+    align-items: center
+
+  .colMd3, .colMd6, .colMd8
+    flex: 0 0 100%
+    max-width: 100%
+    text-align: center
+
+  .footerLinks
+    padding: 0

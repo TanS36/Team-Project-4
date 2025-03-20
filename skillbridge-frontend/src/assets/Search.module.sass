@@ -3,6 +3,7 @@
   flex-direction: column
   align-items: center
   width: 100%
+  min-height: 80vh
   padding: 20px
 
 .searchBar
@@ -32,15 +33,23 @@
     &:hover
       background-color: #140f24
 
+.title
+  font-size: 24px
+  font-weight: bold
+  margin-bottom: 20px
+
 .categories
   display: grid
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))
+  grid-template-columns: repeat(4, 1fr)
   gap: 20px
   width: 100%
   max-width: 1200px
+  margin-bottom: 20px
 
 .categoryCard
+  padding: 10px 0 0
   display: flex
+  flex-direction: column
   border: 3px solid
   border-radius: 16px
   overflow: hidden
@@ -51,35 +60,40 @@
     transform: translateY(-5px)
 
 .imageSection
-  width: 50%
-  background-size: cover
+  width: 100%
+  height: 150px
+  background-size: contain
   background-position: center
+  background-repeat: no-repeat
 
 .textSection
-  width: 50%
   display: flex
   justify-content: center
   align-items: center
   padding: 10px
 
   h3
-    font-size: 24px
+    font-size: 20px
     font-weight: 600
     text-align: center
 
-@media (max-width: 768px)
+@media (max-width: 1280px)
+  .categories
+    grid-template-columns: repeat(2, 1fr)
+    width: 80%
+    max-width: 900px
+    
+
+@media (max-width: 630px)
+  .categories
+    grid-template-columns: 1fr
   .searchBar
-    flex-direction: column
+    width: 100%
+    input
+      padding: 10px 16px
+      font-size: 14px
+      border-radius: 8px 0 0 8px
+    
 
-    input, button
-      width: 100%
-      border-radius: 8px
-      margin-bottom: 10px
 
-  .categoryCard
-    flex-direction: column
-    min-height: 250px
-
-    .imageSection, .textSection
-      width: 100%
-      height: 50%
+  
