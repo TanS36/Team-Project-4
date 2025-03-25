@@ -1,13 +1,8 @@
-//App.jsx
+// App.jsx
 import './App.css';
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Search from "./components/Search";
-import RegisterPage from "./pages/RegisterPage"; 
-import LoginPage from "./pages/LoginPage"; 
-import ProfilePage from "./pages/ProfilePage"; 
+import { BrowserRouter as Router } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,23 +15,14 @@ function App() {
 
     return (
         <Router>
-            <Header />
-            <Routes>
-                <Route path="/" element={
-                    <Search 
-                        onSearch={(query) => console.log("Searching:", query)} 
-                        isLoggedIn={isLoggedIn} 
-                        username={username} 
-                        onLogin={handleLogin}
-                    />
-                } />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-            </Routes>
-            <Footer />
+            <AppRoutes 
+                isLoggedIn={isLoggedIn} 
+                username={username} 
+                handleLogin={handleLogin} 
+            />
         </Router>
     );
 }
 
 export default App;
+

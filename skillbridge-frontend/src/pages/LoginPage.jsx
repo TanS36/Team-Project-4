@@ -1,38 +1,34 @@
 //LoginPage.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../redux/userSlice";
 import styles from "../assets/Registration.module.sass";
 
 const LoginPage = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
-    const [error, setError] = useState(null);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { user, loading, error } = useSelector((state) => state.user);
+
+    useEffect(() => {
+        if (user) navigate("/profile");
+    }, [user, navigate]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        setError(null);
-
-        try {
-            const response = await axios.post("http://localhost:8080/api/auth/login", formData);
-            localStorage.setItem("token", response.data.token);
-            navigate("/profile");
-        } catch (err) {
-            setError("Invalid email or password.");
-        }
+        dispatch(loginUser(formData));
     };
 
     return (
         <div className={styles.container}>
             <div className={styles.formWrapper}>
                 <h2 className={styles.title}>Login</h2>
-
-                {error && <p className="text-red-500 text-center">{error}</p>}
-
+                {error && <p className="animate-pulse text-red-500">{error}</p>}
                 <form onSubmit={handleSubmit}>
                     <input
                         type="email"
@@ -43,7 +39,6 @@ const LoginPage = () => {
                         className={styles.input}
                         required
                     />
-
                     <input
                         type="password"
                         name="password"
@@ -53,12 +48,10 @@ const LoginPage = () => {
                         className={styles.input}
                         required
                     />
-
-                    <button type="submit" className={styles.button}>
-                        Login
+                    <button type="submit" disabled={loading} className={styles.button}>
+                        {loading ? "Logging in..." : "Login"}
                     </button>
                 </form>
-
                 <button onClick={() => navigate("/register")} className={styles.button}>
                     I don't register
                 </button>
@@ -68,4 +61,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
