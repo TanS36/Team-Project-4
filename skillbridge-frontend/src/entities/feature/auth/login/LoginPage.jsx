@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../redux/userSlice";
-import styles from "../assets/Registration.module.sass";
+import { loginUser } from "../../../../redux/userSlice";
+import styles from "./ui/Login.module.sass";
 
 const LoginPage = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });

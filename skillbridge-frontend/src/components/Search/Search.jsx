@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import styles from "../assets/Search.module.sass";
-import communityIcon from "../assets/community_search_icon.png";
-import cookingIcon from "../assets/cooking_search_icon.png";
-import householdIcon from "../assets/household_search_icon.png";
-import jawIcon from "../assets/jaw_search_icon.png";
+import styles from "./ui/Search.module.sass";
+import communityIcon from "./ui/images/community_search_icon.png";
+import cookingIcon from "./ui/images/cooking_search_icon.png";
+import householdIcon from "./ui/images/household_search_icon.png";
+import jawIcon from "./ui/images/jaw_search_icon.png";
+import CourseSearchBlock from "./CourseSearchBlock";
 
 const categories = [
   {
@@ -65,6 +66,7 @@ const Search = ({ onSearch }) => {
         ))}
       </div>
       <h2 className={styles.title}>Популярные курсы</h2>
+      <CourseSearchBlock />
     </div>
   );
 };

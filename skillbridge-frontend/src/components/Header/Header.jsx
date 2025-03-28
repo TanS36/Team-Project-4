@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../assets/Header.module.sass";
+import styles from "./ui/Header.module.sass";
 
 const Header = () => {
 

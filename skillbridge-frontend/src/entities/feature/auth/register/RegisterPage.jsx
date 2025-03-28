@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../redux/userSlice";
+import { registerUser } from "../../../../redux/userSlice";
 import { useNavigate } from "react-router-dom";
-import styles from "../assets/Registration.module.sass";
+import styles from "./ui/Registration.module.sass";
 
 const RegisterPage = () => {
     const [formData, setFormData] = React.useState({ name: "", email: "", password: "" });

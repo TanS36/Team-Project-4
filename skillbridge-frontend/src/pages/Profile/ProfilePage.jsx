@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserProfile } from "../redux/userSlice";
-import styles from "../assets/Profile.module.sass";
+import { fetchUserProfile } from "../../redux/userSlice";
+import styles from "./ui/Profile.module.sass";
 
 const ProfilePage = () => {
     const dispatch = useDispatch();
