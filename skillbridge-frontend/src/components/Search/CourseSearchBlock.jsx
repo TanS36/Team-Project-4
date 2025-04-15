@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./ui/Search.module.sass";
 
-const courses = [
+export const courses = [
   {
     name: "Самые лёгкие рецепты дома",
     color: "#28a745",

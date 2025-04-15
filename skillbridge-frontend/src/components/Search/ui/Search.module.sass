@@ -11,27 +11,36 @@
   width: 90%
   max-width: 1200px
   margin-bottom: 30px
+  position: relative
 
   input
     flex: 1
     padding: 12px 20px
     font-size: 16px
     border: 2px solid #ccc
-    border-radius: 8px 0 0 8px
+    border-radius: 8px
     outline: none
 
-  button
-    padding: 12px 30px
-    background-color: #362d50
-    color: #fefefe
-    border: none
-    border-radius: 0 8px 8px 0
-    font-size: 16px
-    cursor: pointer
-    transition: background-color 0.3s ease
+  .searchResults
+    position: absolute
+    top: 100%
+    left: 0
+    right: 0
+    background-color: #fff
+    border: 1px solid #ccc
+    border-top: none
+    z-index: 1000
+    max-height: 300px
+    overflow-y: auto
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
 
-    &:hover
-      background-color: #140f24
+    .searchResultItem
+      padding: 10px 20px
+      cursor: pointer
+      transition: background-color 0.3s ease
+
+      &:hover
+        background-color: #f0f0f0
 
 .title
   font-size: 24px
@@ -112,7 +121,6 @@
     input
       padding: 10px 16px
       font-size: 14px
-      border-radius: 8px 0 0 8px
   .courseContainer
     grid-template-columns: 1fr
     

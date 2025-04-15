@@ -1,40 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./ui/Search.module.sass";
 import communityIcon from "./ui/images/community_search_icon.png";
 import cookingIcon from "./ui/images/cooking_search_icon.png";
 import householdIcon from "./ui/images/household_search_icon.png";
 import jawIcon from "./ui/images/jaw_search_icon.png";
 import CourseSearchBlock from "./CourseSearchBlock";
+import { courses } from "./CourseSearchBlock";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
   {
     name: "Хозяйство",
     color: "#d42824",
-    image: householdIcon,  //<a href="https://ru.freepik.com/icon/sustainability_17607850#fromView=search&page=1&position=29&uuid=a2438bb2-d055-4778-842d-26f7ecca5001">Источник иконки: Artifex</a>
+    image: householdIcon,
   },
   {
     name: "Общество",
     color: "#f4c542",
-    image: communityIcon,  //<a href="https://ru.freepik.com/icon/connection_16114628#fromView=search&page=1&position=60&uuid=46023098-a8bb-499a-be41-0f635f38aba2">Источник иконки: Maan Icons</a>
+    image: communityIcon,
   },
   {
     name: "Кулинария",
     color: "#28a745",
-    image: cookingIcon,  //<a href="https://ru.freepik.com/icon/cooking_11519619#fromView=search&page=1&position=2&uuid=db769310-c185-4593-b958-7d39d9609848">Источник иконки: Iconic Panda</a>
+    image: cookingIcon,
   },
   {
     name: "Налоги и Законы",
     color: "#007bff",
-    image: jawIcon, //<a href="https://ru.freepik.com/icon/tax_10163425#fromView=search&page=1&position=11&uuid=33d9a05d-94f6-46c2-b256-805a277a6e20">Источник иконки: lakonicon</a>
+    image: jawIcon,
   },
 ];
 
-const Search = ({ onSearch }) => {
-  const [query, setQuery] = useState("");
-
-  const handleSearch = () => {
-    onSearch(query);
-  };
+  const Search = ({ onSearch }) => {
+    const [query, setQuery] = useState("");
+    const navigate = useNavigate();
+    const resultsRef = useRef();
+  
+    // Фильтрация по началу строки, а не по вхождению
+    const filteredCourses = courses.filter(course =>
+      course.name.toLowerCase().startsWith(query.toLowerCase())
+    );
+  
+    // Для скрытия выпадающего списка при клике вне него
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (resultsRef.current && !resultsRef.current.contains(event.target)) {
+          // Если нужно скрывать результаты при клике вне, можно обнулять query или добавить дополнительное состояние
+          // Например: setQuery(""); 
+        }
+      };
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+  
 
   return (
     <div className={styles.container}>
@@ -45,10 +63,31 @@ const Search = ({ onSearch }) => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button onClick={handleSearch}>Поиск</button>
+        {/* Выпадающий список результатов */}
+        {query && (
+          <div className={styles.searchResults} ref={resultsRef}>
+            {filteredCourses.length > 0 ? (
+              filteredCourses.map((course, index) => (
+                <div
+                  key={index}
+                  className={styles.searchResultItem}
+                  onClick={() => {
+                    navigate(course.path);
+                    setQuery(""); // Сбросить поиск после клика, если нужно
+                  }}
+                >
+                  {course.name}
+                </div>
+              ))
+            ) : (
+              <div className={styles.searchResultItem}>Ничего не найдено.</div>
+            )}
+          </div>
+        )}
       </div>
       <h2 className={styles.title}>Популярные курсы</h2>
       <CourseSearchBlock />
+
       <h2 className={styles.title}>Категории</h2>
       <div className={styles.categories}>
         {categories.map((category, index) => (
