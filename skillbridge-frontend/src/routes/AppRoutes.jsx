@@ -5,7 +5,7 @@ import RegisterPage from "../entities/feature/auth/register/RegisterPage";
 import LoginPage from "../entities/feature/auth/login/LoginPage";
 import ProfilePage from "../pages/Profile/ProfilePage";
 import CoursePage from "../pages/Course/CoursePage";
-
+import LessonPage from "../pages/Course/LessonPage";
 
 
 const AppRoutes = ({ isLoggedIn, username, handleLogin }) => {
@@ -16,6 +16,7 @@ const AppRoutes = ({ isLoggedIn, username, handleLogin }) => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/course/:courseId" element={<CoursePage />} />
+            <Route path="/course/:courseId/:lessonID" element={<LessonPage />} />
         </Routes>
     );
 };

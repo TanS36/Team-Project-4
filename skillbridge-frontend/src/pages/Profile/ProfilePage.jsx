@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile } from "../../redux/userSlice";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import styles from "./ui/Profile.module.sass";
 
 const ProfilePage = () => {
@@ -12,6 +14,8 @@ const ProfilePage = () => {
     }, [dispatch]);
 
     return (
+        <>
+        <Header />
         <div className={styles.container}>
             <div className={styles.profileWrapper}>
                 <h2 className={styles.title}>User Information</h2>
@@ -27,6 +31,8 @@ const ProfilePage = () => {
                 )}
             </div>
         </div>
+        <Footer />
+        </>
     );
 };
 

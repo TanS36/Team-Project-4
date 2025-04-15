@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../../redux/userSlice";
+import Header from "../../../../components/Header/Header";
+import Fotter from "../../../../components/Footer/Footer";
 import styles from "./ui/Login.module.sass";
 
 const LoginPage = () => {
@@ -25,6 +27,8 @@ const LoginPage = () => {
     };
 
     return (
+        <>
+        <Header />
         <div className={styles.container}>
             <div className={styles.formWrapper}>
                 <h2 className={styles.title}>Login</h2>
@@ -57,6 +61,8 @@ const LoginPage = () => {
                 </button>
             </div>
         </div>
+        <Fotter />
+        </>
     );
 };
 

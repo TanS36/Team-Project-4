@@ -14,6 +14,16 @@ const courses = [
     color: "#d42824",
     path: "/course/iron-usage",
   },
+  {
+    name: "Как платить налоги",
+    color: "#007bff",
+    path: "/course/tax",
+  },
+  {
+    name: "Первый шаг к знакомству",
+    color: "#f4c542",
+    path: "/course/metting",
+  },
 ];
 
 const CourseSearchBlock = () => {

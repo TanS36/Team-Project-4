@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../../../redux/userSlice";
 import { useNavigate } from "react-router-dom";
+import Header from "../../../../components/Header/Header";
+import Fotter from "../../../../components/Footer/Footer";
 import styles from "./ui/Registration.module.sass";
 
 const RegisterPage = () => {
@@ -27,6 +29,8 @@ const RegisterPage = () => {
     };
 
     return (
+        <>
+        <Header />
         <div className={styles.container}>
             <div className={styles.formWrapper}>
                 <h2 className={styles.title}>Registration</h2>
@@ -75,6 +79,8 @@ const RegisterPage = () => {
                 </button>
             </div>
         </div>
+        <Fotter />
+        </>
     );
 };
 

@@ -1,0 +1,126 @@
+.wrapper
+    display: flex
+    justify-content: center
+    gap: 20px
+    padding: 0 20px
+
+.sidebar
+  flex: 1
+  background-color: #fff
+  border-radius: 16px
+  padding: 20px
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08)
+  max-width: 280px
+  margin: 20px 10px 
+  height: fit-content
+
+  h3
+    font-size: 18px
+    margin-bottom: 10px
+
+  ul
+    list-style: none
+    padding: 0
+
+  li
+    margin-bottom: 10px
+    font-size: 16px
+    color: #333
+    cursor: pointer
+
+    &:hover
+      text-decoration: underline
+
+.coursecontainer
+    display: flex
+    flex-direction: column
+    align-items: center
+    background-color: #fff
+    border-radius: 16px
+    padding: 30px
+    max-width: 900px
+    width: 96%
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1)
+    margin: 20px auto 
+    flex: 2
+
+    .banner
+        width: 100%
+        max-width: 800px
+        max-height: 200px
+        object-fit: cover
+        border-radius: 16px
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+        margin-bottom: 20px
+        
+
+    h2
+        font-size: 28px
+        color: #333
+        margin-bottom: 10px
+        text-align: center
+
+    h3
+        font-size: 22px
+        color: #555
+        margin-bottom: 15px
+
+    ul
+        list-style: none
+        padding: 0
+        width: 100%
+        max-width: 600px
+
+    li
+        background-color: #f9f9f9
+        padding: 12px 20px
+        border-radius: 10px
+        margin-bottom: 10px
+        font-size: 18px
+        font-weight: 500
+        transition: all 0.3s ease
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08)
+
+        &:hover
+            background-color: #e3e3e3
+            transform: translateY(-2px)
+            transition: all 0.3s ease
+    .backButton
+        margin-top: 20px
+        padding: 10px 20px
+        font-size: 16px
+        border: none
+        border-radius: 8px
+        background-color: #555
+        color: #fff
+        cursor: pointer
+        transition: background-color 0.3s ease
+
+        &:hover
+            background-color: #333
+
+@media (max-width: 900px)
+    .wrapper
+        flex-direction: column
+        align-items: center
+
+    .sidebar
+        max-width: 100%
+        width: 100%
+        margin-top: 20px
+
+@media (max-width: 768px)
+    .coursecontainer
+        .container
+            padding: 20px
+            width: 90%
+
+        .banner
+            width: 100%
+
+        ul
+            max-width: 100%
+
+        li
+            font-size: 16px
+            padding: 10px 15px

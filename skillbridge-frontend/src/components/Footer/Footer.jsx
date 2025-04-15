@@ -15,18 +15,18 @@ const Footer = () => {
           <div className={`${styles.col} ${styles.colMd3}`}>
             <h6>Ссылки</h6>
             <ul className={styles.footerLinks}>
-              <li><a href="#">О нас</a></li>
-              <li><a href="#">Контакты</a></li>
-              <li><a href="#">Конфиденциальность</a></li>
+              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">О нас</a></li>
+              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Контакты</a></li>
+              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Конфиденциальность</a></li>
             </ul>
           </div>
           <div className={`${styles.col} ${styles.colMd3}`}>
             <h6>Категории</h6>
             <ul className={styles.footerLinks}>
-              <li><a href="#">Хозяйственно</a></li>
-              <li><a href="#">Общественное</a></li>
-              <li><a href="#">Кулинария</a></li>
-              <li><a href="#">Налоги и Законы</a></li>
+              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Хозяйственно</a></li>
+              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Общественное</a></li>
+              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Кулинария</a></li>
+              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Налоги и Законы</a></li>
             </ul>
           </div>
         </div>
@@ -46,4 +46,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

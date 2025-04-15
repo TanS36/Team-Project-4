@@ -47,6 +47,8 @@ const Search = ({ onSearch }) => {
         />
         <button onClick={handleSearch}>Поиск</button>
       </div>
+      <h2 className={styles.title}>Популярные курсы</h2>
+      <CourseSearchBlock />
       <h2 className={styles.title}>Категории</h2>
       <div className={styles.categories}>
         {categories.map((category, index) => (
@@ -65,11 +67,8 @@ const Search = ({ onSearch }) => {
           </div>
         ))}
       </div>
-      <h2 className={styles.title}>Популярные курсы</h2>
-      <CourseSearchBlock />
     </div>
   );
 };
 
 export default Search;
-
