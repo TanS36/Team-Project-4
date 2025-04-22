@@ -12,21 +12,25 @@ const categories = [
   {
     name: "Хозяйство",
     color: "#d42824",
+    categoryName: "household" ,
     image: householdIcon,
   },
   {
     name: "Общество",
     color: "#f4c542",
+    categoryName: "community" ,
     image: communityIcon,
   },
   {
     name: "Кулинария",
     color: "#28a745",
+    categoryName: "cooking" ,
     image: cookingIcon,
   },
   {
     name: "Налоги и Законы",
     color: "#007bff",
+    categoryName: "jaws" ,
     image: jawIcon,
   },
 ];
@@ -95,6 +99,7 @@ const categories = [
             key={index}
             className={styles.categoryCard}
             style={{ borderColor: category.color }}
+            onClick={() => navigate(category.categoryName)}
           >
             <div
               className={styles.imageSection}
