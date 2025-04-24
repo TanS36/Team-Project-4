@@ -1,2 +1,27 @@
 .categorycontainer
-    min-height: 70vh
+  padding: 40px
+  min-height: 70vh
+
+.categoryTitle
+  font-size: 28px
+  margin-bottom: 24px
+  color: #140f24
+
+.courseList
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))
+  gap: 20px
+
+.courseCard
+  padding: 16px
+  border: 2px solid
+  border-radius: 16px
+  cursor: pointer
+  background-color: #fff
+  transition: transform 0.2s ease
+  text-align: center
+  &:hover
+    transform: scale(1.03)
+
+  h3
+    font-size: 18px

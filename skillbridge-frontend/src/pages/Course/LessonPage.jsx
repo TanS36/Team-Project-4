@@ -2,7 +2,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./ui/CoursePage.module.sass";
-import { courseData } from "./CoursePage"; // Импорт данных курсов
+import { courseData } from "./courseData";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 

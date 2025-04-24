@@ -13,12 +13,16 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3)
   z-index: 1000
 
+.hideOnMobile
+  @media (max-width: 600px)
+    display: none
+
 .chatBox
   position: fixed
   bottom: 90px
   right: 20px
-  width: 300px
-  max-height: 400px
+  width: 350px
+  max-height: 450px 
   background-color: #fff
   border-radius: 16px
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2)
@@ -27,33 +31,54 @@
   flex-direction: column
   overflow: hidden
 
+  @media (max-width: 600px)
+    width: 100%
+    height: 100%
+    bottom: 0
+    right: 0
+    border-radius: 0
+
 .chatHeader
   background-color: #d42824
   color: #fff
-  padding: 10px
+  padding: 10px 20px
   display: flex
   justify-content: space-between
   align-items: center
   font-weight: bold
 
-  button
-    padding: 10px 16px
-    background-color: #d42824
-    color: #fff
-    border: none
-    border-radius: 8px
-    font-size: 14px
-    font-weight: 500
-    cursor: pointer
-    transition: background-color 0.3s
-
-    &:hover
-      background-color: darken(#d42824, 10%)
+.closeButton
+  font-size: 28px
+  background: none
+  border: none
+  color: white
+  cursor: pointer
+  line-height: 1
 
 .chatBody
   padding: 10px
   font-size: 14px
   color: #333
+  flex: 1
+  overflow-y: auto
+  line-height: 1.6
+
+.operatorMessage
+  background-color: #f1f1f1
+  padding: 8px 12px
+  border-radius: 12px
+  margin-bottom: 10px
+  max-width: 80%
+  align-self: flex-start
+
+.userMessage
+  background-color: #d42824
+  color: #fff
+  padding: 8px 12px
+  border-radius: 12px
+  margin-bottom: 10px
+  max-width: 80%
+  align-self: flex-end
 
 .chatInput
   display: flex
@@ -74,3 +99,19 @@
 
     &:focus
       border-color: #d42824
+
+  button
+    background-color: #d42824
+    color: #fff
+    border: none
+    padding: 10px 16px
+    border-radius: 8px
+    font-size: 16px
+    cursor: pointer
+    display: flex
+    align-items: center
+    justify-content: center
+
+    &:hover
+      background-color: darken(#d42824, 10%)
+

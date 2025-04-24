@@ -1,49 +1,26 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./ui/Search.module.sass";
-import communityIcon from "./ui/images/community_search_icon.png";
-import cookingIcon from "./ui/images/cooking_search_icon.png";
-import householdIcon from "./ui/images/household_search_icon.png";
-import jawIcon from "./ui/images/jaw_search_icon.png";
-import CourseSearchBlock from "./CourseSearchBlock";
-import { courses } from "./CourseSearchBlock";
-import { useNavigate } from "react-router-dom";
 
-const categories = [
-  {
-    name: "Хозяйство",
-    color: "#d42824",
-    categoryName: "household" ,
-    image: householdIcon,
-  },
-  {
-    name: "Общество",
-    color: "#f4c542",
-    categoryName: "community" ,
-    image: communityIcon,
-  },
-  {
-    name: "Кулинария",
-    color: "#28a745",
-    categoryName: "cooking" ,
-    image: cookingIcon,
-  },
-  {
-    name: "Налоги и Законы",
-    color: "#007bff",
-    categoryName: "jaws" ,
-    image: jawIcon,
-  },
-];
+import CourseSearchBlock from "./CourseSearchBlock";
+import { categories, allCourses as courses } from "./courseUtils";
+import { useNavigate } from "react-router-dom";
 
   const Search = ({ onSearch }) => {
     const [query, setQuery] = useState("");
     const navigate = useNavigate();
     const resultsRef = useRef();
   
-    // Фильтрация по началу строки, а не по вхождению
-    const filteredCourses = courses.filter(course =>
-      course.name.toLowerCase().startsWith(query.toLowerCase())
-    );
+    // Фильтрация 
+    const filteredCourses = courses.filter(course => {
+      const queryWords = query.toLowerCase().trim().split(/\s+/);
+      const titleWords = course.name.toLowerCase().split(/\s+/);
+    
+      return queryWords.every(qWord =>
+        titleWords.some(tWord => tWord.startsWith(qWord))
+      );
+    });
+    
+    
   
     // Для скрытия выпадающего списка при клике вне него
     useEffect(() => {

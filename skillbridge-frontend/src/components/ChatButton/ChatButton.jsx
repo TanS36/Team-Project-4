@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./ui/ChatButton.module.sass";
-import { FaComments } from "react-icons/fa";
+import { FaComments, FaArrowUp } from "react-icons/fa";
 
 const ChatButton = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -13,7 +13,6 @@ const ChatButton = () => {
     if (input.trim() !== "") {
       setMessages((prev) => [...prev, { from: "user", text: input }]);
       setInput("");
-      // Можно добавить фейковый ответ от оператора:
       setTimeout(() => {
         setMessages((prev) => [...prev, { from: "operator", text: "Оператор скоро ответит..." }]);
       }, 1000);
@@ -26,7 +25,7 @@ const ChatButton = () => {
 
   return (
     <>
-      <div className={styles.chatButton} onClick={() => setIsChatOpen(!isChatOpen)}>
+      <div className={`${styles.chatButton} ${isChatOpen ? styles.hideOnMobile : ""}`} onClick={() => setIsChatOpen(true)}>
         <FaComments size={24} color="#fff" />
       </div>
 
@@ -34,7 +33,7 @@ const ChatButton = () => {
         <div className={styles.chatBox}>
           <div className={styles.chatHeader}>
             <span>Чат с оператором</span>
-            <button onClick={() => setIsChatOpen(false)}>×</button>
+            <button className={styles.closeButton} onClick={() => setIsChatOpen(false)}>×</button>
           </div>
           <div className={styles.chatBody}>
             {messages.map((msg, index) => (
@@ -44,6 +43,7 @@ const ChatButton = () => {
                   msg.from === "user" ? styles.userMessage : styles.operatorMessage
                 }
               >
+                <strong>{msg.from === "user" ? "Вы" : "Специалист Александр"}: </strong>
                 {msg.text}
               </div>
             ))}
@@ -56,7 +56,9 @@ const ChatButton = () => {
               onKeyDown={handleKeyDown}
               placeholder="Введите сообщение..."
             />
-            <button onClick={handleSend}>Отправить</button>
+            <button onClick={handleSend}>
+              <FaArrowUp />
+            </button>
           </div>
         </div>
       )}
@@ -65,4 +67,3 @@ const ChatButton = () => {
 };
 
 export default ChatButton;
-

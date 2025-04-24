@@ -1,37 +1,28 @@
-// CourseSearchBlock.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./ui/Search.module.sass";
+import { courseData } from "../../pages/Course/courseData";
+import { categories } from "./courseUtils";
 
-export const courses = [
-  {
-    name: "Самые лёгкие рецепты дома",
-    color: "#28a745",
-    path: "/course/easy-recipes",
-  },
-  {
-    name: "Как пользоваться утюгом",
-    color: "#d42824",
-    path: "/course/iron-usage",
-  },
-  {
-    name: "Как платить налоги",
-    color: "#007bff",
-    path: "/course/tax",
-  },
-  {
-    name: "Первый шаг к знакомству",
-    color: "#f4c542",
-    path: "/course/metting",
-  },
-];
+// Курсы, которые не считаются "популярными"
+const excludedPopularKeys = ["pasta", "storage", "water-benefits"];
+
+export const allCourses = Object.entries(courseData).map(([key, course]) => ({
+  key,
+  name: course.title,
+  color: categories.find(c => c.categoryName === course.category)?.color || "#ccc",
+  path: `/course/${key}`,
+}));
+
+// Только популярные (исключая некоторые курсы)
+const popularCourses = allCourses.filter(course => !excludedPopularKeys.includes(course.key));
 
 const CourseSearchBlock = () => {
   const navigate = useNavigate();
 
   return (
     <div className={styles.courseContainer}>
-      {courses.map((course, index) => (
+      {popularCourses.map((course, index) => (
         <div
           key={index}
           className={styles.courseCard}
