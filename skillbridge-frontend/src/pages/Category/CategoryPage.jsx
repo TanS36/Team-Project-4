@@ -1,46 +1,44 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { collection } from "firebase/firestore";
+import { db } from "../../firebase";
 import styles from "./ui/CategoryPage.module.sass";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import { courseData } from "../Course/courseData";
-import { categories } from "../../components/Search/courseUtils";
 
 const CategoryPage = () => {
-  const { categoryName } = useParams(); // Получаем название категории из URL
+  const { categoryName } = useParams();
   const navigate = useNavigate();
 
-  const categoryInfo = categories.find(cat => cat.categoryName === categoryName);
+  const [coursesSnap] = useCollection(collection(db, "courses"));
+  const [categorySnap] = useCollection(collection(db, "categoryColors"));
 
-  // Фильтруем курсы по категории
-  const filteredCourses = Object.entries(courseData)
-    .filter(([_, course]) => course.category === categoryName)
-    .map(([key, course]) => ({
-      key,
-      name: course.title,
-      color: categoryInfo?.color || "#ccc",
-      path: `/course/${key}`,
-    }));
+  const courses = coursesSnap?.docs.map(doc => ({ id: doc.id, ...doc.data() })) || [];
+  const categories = categorySnap?.docs.map(doc => ({ id: doc.id, ...doc.data() })) || [];
+
+  const category = categories.find(c => c.id === categoryName);
+  const filteredCourses = courses.filter(course => course.category === categoryName);
 
   return (
     <>
       <Header />
       <div className={styles.categorycontainer}>
-        <h2 className={styles.categoryTitle}>{categoryInfo?.name || "Категория"}</h2>
+        <h2 className={styles.categoryTitle}>{category?.name || "Категория"}</h2>
         <div className={styles.courseList}>
           {filteredCourses.length > 0 ? (
             filteredCourses.map(course => (
               <div
-                key={course.key}
+                key={course.id}
                 className={styles.courseCard}
-                style={{ borderColor: course.color }}
-                onClick={() => navigate(course.path)}
+                style={{ borderColor: category?.color || "#999" }}
+                onClick={() => navigate(`/course/${course.id}`)}
               >
-                <h3 style={{ color: course.color }}>{course.name}</h3>
+                <h3 style={{ color: category?.color || "#999" }}>{course.title}</h3>
               </div>
             ))
           ) : (
-            <p>Курсы не найдены для этой категории.</p>
+            <p>Нет курсов в этой категории.</p>
           )}
         </div>
       </div>

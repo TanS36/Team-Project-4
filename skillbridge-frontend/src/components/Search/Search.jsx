@@ -1,39 +1,30 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./ui/Search.module.sass";
-
 import CourseSearchBlock from "./CourseSearchBlock";
-import { categories, allCourses as courses } from "./courseUtils";
 import { useNavigate } from "react-router-dom";
+import { db } from "../../firebase";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { collection } from "firebase/firestore";
 
-  const Search = ({ onSearch }) => {
-    const [query, setQuery] = useState("");
-    const navigate = useNavigate();
-    const resultsRef = useRef();
-  
-    // Фильтрация 
-    const filteredCourses = courses.filter(course => {
-      const queryWords = query.toLowerCase().trim().split(/\s+/);
-      const titleWords = course.name.toLowerCase().split(/\s+/);
-    
-      return queryWords.every(qWord =>
-        titleWords.some(tWord => tWord.startsWith(qWord))
-      );
-    });
-    
-    
-  
-    // Для скрытия выпадающего списка при клике вне него
-    useEffect(() => {
-      const handleClickOutside = (event) => {
-        if (resultsRef.current && !resultsRef.current.contains(event.target)) {
-          // Если нужно скрывать результаты при клике вне, можно обнулять query или добавить дополнительное состояние
-          // Например: setQuery(""); 
-        }
-      };
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
-  
+const Search = () => {
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const [coursesSnap] = useCollection(collection(db, "courses"));
+  const [categorySnap] = useCollection(collection(db, "categoryColors"));
+
+  const courses = coursesSnap?.docs.map(doc => ({ id: doc.id, ...doc.data() })) || [];
+  const categories = categorySnap?.docs.map(doc => ({ id: doc.id, ...doc.data() })) || [];
+
+  const categoriesMap = {};
+  categories.forEach(cat => {
+    categoriesMap[cat.id] = cat;
+  });
+
+  const filteredCourses = courses.filter(course => {
+    const q = query.toLowerCase().trim();
+    return course.title.toLowerCase().includes(q);
+  });
 
   return (
     <div className={styles.container}>
@@ -44,46 +35,51 @@ import { useNavigate } from "react-router-dom";
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        {/* Выпадающий список результатов */}
         {query && (
-          <div className={styles.searchResults} ref={resultsRef}>
+          <div className={styles.searchResults}>
             {filteredCourses.length > 0 ? (
-              filteredCourses.map((course, index) => (
-                <div
-                  key={index}
-                  className={styles.searchResultItem}
-                  onClick={() => {
-                    navigate(course.path);
-                    setQuery(""); // Сбросить поиск после клика, если нужно
-                  }}
-                >
-                  {course.name}
-                </div>
-              ))
+              filteredCourses.map((course) => {
+                const color = categoriesMap[course.category]?.color || "#999";
+                return (
+                  <div
+                    key={course.id}
+                    className={styles.searchResultItem}
+                    style={{ color }}
+                    onClick={() => {
+                      navigate(`/course/${course.id}`);
+                      setQuery("");
+                    }}
+                  >
+                    {course.title}
+                  </div>
+                );
+              })
             ) : (
               <div className={styles.searchResultItem}>Ничего не найдено.</div>
             )}
           </div>
         )}
       </div>
+
       <h2 className={styles.title}>Популярные курсы</h2>
-      <CourseSearchBlock />
+      <CourseSearchBlock categories={categories} />
+
 
       <h2 className={styles.title}>Категории</h2>
       <div className={styles.categories}>
-        {categories.map((category, index) => (
+        {categories.map((cat) => (
           <div
-            key={index}
+            key={cat.id}
             className={styles.categoryCard}
-            style={{ borderColor: category.color }}
-            onClick={() => navigate(category.categoryName)}
+            style={{ borderColor: cat.color }}
+            onClick={() => navigate(`/category/${cat.id}`)}
           >
             <div
               className={styles.imageSection}
-              style={{ backgroundImage: `url(${category.image})` }}
-            ></div>
+              style={{ backgroundImage: `url(${cat.image})` }}
+            />
             <div className={styles.textSection}>
-              <h3 style={{ color: category.color }}>{category.name}</h3>
+              <h3 style={{ color: cat.color }}>{cat.name}</h3>
             </div>
           </div>
         ))}
@@ -93,3 +89,4 @@ import { useNavigate } from "react-router-dom";
 };
 
 export default Search;
+

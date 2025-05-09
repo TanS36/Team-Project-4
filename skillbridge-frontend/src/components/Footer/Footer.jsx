@@ -23,8 +23,8 @@ const Footer = () => {
           <div className={`${styles.col} ${styles.colMd3}`}>
             <h6>Категории</h6>
             <ul className={styles.footerLinks}>
-              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Хозяйственно</a></li>
-              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Общественное</a></li>
+              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Хозяйство</a></li>
+              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Общество</a></li>
               <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Кулинария</a></li>
               <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Налоги и Законы</a></li>
             </ul>
