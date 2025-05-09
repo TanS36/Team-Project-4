@@ -18,7 +18,8 @@ const AppRoutes = ({ isLoggedIn, username, handleLogin }) => {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/course/:courseId" element={<CoursePage />} />
             <Route path="/course/:courseId/:lessonID" element={<LessonPage />} />
-            <Route path="/:categoryName" element={<CategoryPage />} />
+            <Route path="/category/:categoryId" element={<CategoryPage />} />
+
         </Routes>
     );
 };
