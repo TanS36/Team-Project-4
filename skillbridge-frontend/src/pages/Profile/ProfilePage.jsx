@@ -26,7 +26,6 @@ const ProfilePage = () => {
                             )}
                             <p><strong>Display Name:</strong> {user.displayName || "Not set"}</p>
                             <p><strong>Email:</strong> {user.email}</p>
-                            <p><strong>User ID:</strong> {user.uid}</p>
                             <p><strong>Created:</strong> {user.metadata?.creationTime}</p>
                             <p><strong>Last Login:</strong> {user.metadata?.lastSignInTime}</p>
                             <button onClick={() => signOut(auth)} className={styles.logoutBtn}>Logout</button>
