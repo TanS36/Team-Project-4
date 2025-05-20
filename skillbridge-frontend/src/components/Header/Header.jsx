@@ -25,7 +25,6 @@ const Header = () => {
             <nav className={styles.sitenavigation}>
                 <ul className={styles.nav}>
                     <li><a href="/">Главная</a></li>
-                    <li><a href="/">Блог</a></li>
                     <li>
                         <a href="/#" onClick={handleProfileClick}>
                             {user ? "Профиль" : "Логин"}
@@ -38,3 +37,7 @@ const Header = () => {
 };
 
 export default Header;
+
+
+
+
